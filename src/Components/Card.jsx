@@ -1,12 +1,16 @@
 import styles from "./Card.module.css";
+import {useTheme} from "./../Hooks/useTheme"
 
 const Card = () => {
+
+  const { theme, changeTheme} = useTheme();
+  
 
   return (
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-      <div className={`card`}>
+      <div className={`card ${theme}`}>
         <img
           className="card-img-top"
           src="/images/doctor.jpg"

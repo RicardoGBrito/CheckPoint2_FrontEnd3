@@ -1,16 +1,20 @@
 import styles from "./Navbar.module.css";
+import {useTheme} from "./../Hooks/useTheme"
+
 
 const Navbar = () => {
 
+  
+  const { theme, changeTheme } = useTheme()
   return (
-    <header className="sticky-top">
+    <header className={`sticky-top`}>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar navbar-dark bg-dark ou navbar-light bg-light*/}
       <nav
-        className={`navbar navbar-expand-sm navbar-light bg-light`}
+        className={`navbar navbar-expand-sm navbar-light bg-light ${theme}`}
         aria-label="Third navbar example"
       >
-        <div className="container">
+        <div className={`container`}>
           {/* Ao clicar, o usuário deve ser redirecionado a home, com react-router */}
           <a className={`navbar-brand ${styles.navbarBrand}`} href="/home">
             DH Odonto
@@ -55,8 +59,8 @@ const Navbar = () => {
                  Na linha seguinte deverá ser feito um teste se a aplicação
                  está em dark mode e deverá utilizar o icone ☀ ou 🌙 e btn-dark ou btn-light*/}
                 <button
-                  className={`btn btn-light${styles.btnStyle
-                    }`}
+                  className={`btn btn-light${styles.btnStyle}`}
+                  onClick={()=>changeTheme(localStorage.getItem('theme'))}
                 >
                   ☀ 🌙{" "}
                 </button>
