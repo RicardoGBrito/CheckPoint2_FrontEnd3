@@ -1,11 +1,12 @@
 
-import { 
+import {
   createBrowserRouter,
   RouterProvider
 } from "react-router-dom";
 import Home from "./Routes/Home";
 import Login from "./Routes/Login";
 import Detail from "./Routes/Detail";
+import { MainLayout } from "./Components/MainLayout";
 
 
 function App() {
@@ -16,15 +17,15 @@ function App() {
       children: [
         {
           path: 'home',
-          element: <Home/>
+          element: <Home />
         },
         {
           path: 'login',
-          element: <Login/>
+          element: <Login />
         },
         {
           path: 'detail',
-          element: <Detail/>
+          element: <Detail />
         }
       ]
     }
@@ -34,7 +35,7 @@ function App() {
   return (
     <RouterProvider router={appRouter} />
   )
- 
-    
+}
+
 
 export default App;
