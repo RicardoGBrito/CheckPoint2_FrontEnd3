@@ -13,6 +13,7 @@ import Detail from "./Routes/Detail";
 import Home from "./Routes/Home";
 import "./index.css";
 import { ThemeProvider } from "./Hooks/useTheme"
+import { DentistInfoProvider } from "./Hooks/useDentistInfo"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 //Lembre-se de configurar suas rotas e seu contexto aqui
@@ -35,10 +36,10 @@ const appRouter = createBrowserRouter([
         path: 'dentist/:id',
         element: <Detail/>
       },
-      {
-        path: 'detail',
-        element: <Detail/>
-      },
+      // {
+      //   path: 'detail',
+      //   element: <Detail/>
+      // },
       { path: '', loader: () => redirect('/home')}
     ]
   }
@@ -48,11 +49,9 @@ const appRouter = createBrowserRouter([
 root.render(
   <React.StrictMode>
     <ThemeProvider>
-      {/* <Navbar />
-      <Home />
-      <Footer />  */}
-
-      <RouterProvider router={appRouter} />
+      <DentistInfoProvider>
+        <RouterProvider router={appRouter} />
+      </DentistInfoProvider>
     </ThemeProvider>
   </React.StrictMode>
 );
