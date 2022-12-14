@@ -12,31 +12,31 @@ code {
     monospace;
 }
 
-main{
+main {
   min-height: calc(100vh - 292px);
 }
 
-h1{
+h1 {
   text-align: center;
   padding: 2rem 0;
 }
 
-.navbar-nav{
+.navbar-nav {
   align-items: center;
 }
 
-.row{
+.row {
   align-items: center;
 }
 
-a{
+a {
   color: #000;
   text-decoration: none;
   margin: 5px;
   cursor: pointer;
 }
 
-a:hover{
+a:hover {
   color: rgb(136, 136, 136);
 } 
 

@@ -1,25 +1,37 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import { createContext, useContext } from "react";
 
 
 const ThemeContext = createContext()
 
-export function ThemeProvider(props) {
+function themeReducer(currentTheme, action) {
+    switch (action.type) {
+        case 'toggle_theme':
+            if (action.payload.theme !== currentTheme) {
+
+                localStorage.setItem('theme', action.payload.theme)
+                return action.payload.theme
+
+            }
+        default:
+            throw new Error();
+    }   
+}
+
+function getThemeFromStorage() {
 
     const themeLocalStorage = localStorage.getItem('theme')
+    return themeLocalStorage || "light"
+
+}
+
+export function ThemeProvider(props) {
  
     // State que irá controlar qual Tema a aplicação está usando
-    const [theme, setTheme] = useState(themeLocalStorage || "light")
+    const [theme, themeDispatch] = useReducer(themeReducer, {}, getThemeFromStorage)
 
-
-    function changeTheme(themeReceived) {
-
-        if (themeReceived !== theme) {
-
-            setTheme(themeReceived)
-            localStorage.setItem('theme', themeReceived)
-
-        }
+    function changeTheme(newTheme) {
+        themeDispatch({ type: "toggle_theme", payload: {theme: newTheme} })
     }
 
     return (
