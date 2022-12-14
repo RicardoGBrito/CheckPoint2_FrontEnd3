@@ -4,29 +4,27 @@ import { createContext, useContext } from "react";
 
 const ThemeContext = createContext()
 
-export function ThemeProvider(props){
+export function ThemeProvider(props) {
 
     const themeLocalStorage = localStorage.getItem('theme')
+ 
     // State que irá controlar qual Tema a aplicação está usando
     const [theme, setTheme] = useState(themeLocalStorage || "")
 
-    function changeTheme(themeReceived){
 
-        if(themeReceived !== 'dark'){
+    function changeTheme(themeRecieved) {
 
-            setTheme('dark')
-            localStorage.setItem("theme", 'dark')
-        }
-        else{
-            setTheme('')
-            localStorage.setItem("theme", '')
+        if (themeRecieved !== theme) {
+
+            setTheme(themeRecieved)
+            localStorage.setItem('theme', themeRecieved)
 
         }
     }
 
     return (
-        <ThemeContext.Provider value={{theme, changeTheme}}>
-            { props.children }
+        <ThemeContext.Provider value={{ theme, changeTheme }}>
+            {props.children}
         </ThemeContext.Provider>
     )
 }

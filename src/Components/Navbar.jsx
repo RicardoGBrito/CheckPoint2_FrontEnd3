@@ -1,10 +1,10 @@
 import styles from "./Navbar.module.css";
-import {useTheme} from "./../Hooks/useTheme"
+import { useTheme } from "./../Hooks/useTheme"
 
 
 const Navbar = () => {
 
-  
+
   const { theme, changeTheme } = useTheme()
   return (
     <header className={`sticky-top`}>
@@ -59,10 +59,10 @@ const Navbar = () => {
                  Na linha seguinte deverá ser feito um teste se a aplicação
                  está em dark mode e deverá utilizar o icone ☀ ou 🌙 e btn-dark ou btn-light*/}
                 <button
-                  className={`btn btn-light${styles.btnStyle}`}
-                  onClick={()=>changeTheme(localStorage.getItem('theme'))}
+                  className={`btn btn-light${theme}`}
+                  onClick={() => changeTheme(localStorage.getItem('theme') === 'light' ? 'dark' : 'light')}
                 >
-                  ☀ 🌙{" "}
+                  {theme === 'dark' ? '🌙' : '☀'}
                 </button>
               </li>
             </ul>
