@@ -1,7 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Card from "../Components/Card";
-import { useState } from "react";
-
 
 const Home = () => {
 
@@ -17,6 +15,7 @@ const Home = () => {
         response.json().then(
           data => {
             setCardDados(data)
+            console.log(data)
           }
         )
       }

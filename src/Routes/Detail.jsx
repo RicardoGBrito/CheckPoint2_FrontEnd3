@@ -1,5 +1,5 @@
 import DetailCard from "../Components/DetailCard";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 
 const Detail = () => {
 

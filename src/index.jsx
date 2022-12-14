@@ -5,7 +5,8 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import App from './App'
 import { 
   createBrowserRouter,
-  RouterProvider
+  RouterProvider,
+  redirect
 } from "react-router-dom";
 import Login from "./Routes/Login";
 import Detail from "./Routes/Detail";
@@ -31,9 +32,14 @@ const appRouter = createBrowserRouter([
         element: <Login/>
       },
       {
+        path: 'dentist/:id',
+        element: <Detail/>
+      },
+      {
         path: 'detail',
         element: <Detail/>
-      }
+      },
+      { path: '', loader: () => redirect('/home')}
     ]
   }
 

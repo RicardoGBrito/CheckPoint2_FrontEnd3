@@ -79,11 +79,11 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
-.dark{
+.dark {
   background-color: #12121296 !important;
   color: white;
 }
-.dark > a {
+.dark a {
   color: white;
 }
 

@@ -1,8 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ScheduleFormModal from "./ScheduleFormModal";
 import styles from "./DetailCard.module.css";
+import {useTheme} from "./../Hooks/useTheme"
 
 const DetailCard = (props) => {
+
+  const { theme } = useTheme();
+  const [dadosDentista, setDadosDentista] = useState()
 
   useEffect(() => {
     //Nesse useEffect, você vai fazer um fetch na api passando o 
@@ -17,7 +21,7 @@ const DetailCard = (props) => {
         {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
         <div
-          className={`card-body row`}
+          className={`card-body row card-${theme}`}
         >
           <div className="col-sm-12 col-lg-6">
             <img
