@@ -50,7 +50,10 @@ const Navbar = () => {
                 O botão de logout deverá ser testado darkmode
                 se sim, btn-dark, se não, btn-light */}
                 <a className="nav-link" href="/login">
-                  Login
+                  {
+                  /* localStorage.getItem("token")?()=>{return(<h2>Logout</h2>)}:()=>{return (<h2>Login</h2>)} */
+                  ()=>{return(<h1>olaa</h1>)}
+                  }
                 </a>
               </li>
               <li className={`nav-item`}>
@@ -62,7 +65,7 @@ const Navbar = () => {
                   className={`btn btn-light${styles.btnStyle}`}
                   onClick={()=>changeTheme(localStorage.getItem('theme'))}
                 >
-                  ☀ 🌙{" "}
+                  ☀ 🌙{''}
                 </button>
               </li>
             </ul>

@@ -1,8 +1,10 @@
+import {link, redirect, useNavigate} from "react-router-dom"
 import styles from "./Form.module.css";
 import {useState} from "react";
 
 const LoginForm = () => {
 
+  const navigate = useNavigate()
   const [password,setPassword] = useState('')
   const [login,setLogin] = useState('')
   const [checkInputs, setCheckInputs] = useState('')
@@ -17,6 +19,11 @@ const LoginForm = () => {
     console.log(login)
   }
   
+  function checkToken(){
+    if(localStorage.getItem('token')){
+
+    }
+  }
 
   const handleSubmit = (event) => {
     //Nesse handlesubmit você deverá usar o preventDefault,
@@ -26,6 +33,8 @@ const LoginForm = () => {
     //no localstorage para ser usado em chamadas futuras
     //Com tudo ocorrendo corretamente, o usuário deve ser redirecionado a página principal,com react-router
     //Lembre-se de usar um alerta para dizer se foi bem sucedido ou ocorreu um erro
+
+
     const dados = {
       username: login,
       password: password
@@ -39,8 +48,18 @@ const LoginForm = () => {
       },
       body: JSON.stringify(dados)
     })
-    .then((response)=>response.json())
-    .then(data=>console.log(data))
+    .then((response)=>{
+      
+      if(response.status === 200){
+        
+        response.json().then(data=> localStorage.setItem("token", data.token))
+        navigate("/home")
+      }
+      else{
+        console.log("erro")
+      }
+    })
+    
 
   };
 
