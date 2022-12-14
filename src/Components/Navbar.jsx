@@ -59,10 +59,10 @@ const Navbar = () => {
                  Na linha seguinte deverá ser feito um teste se a aplicação
                  está em dark mode e deverá utilizar o icone ☀ ou 🌙 e btn-dark ou btn-light*/}
                 <button
-                  className={`btn btn-light${theme}`}
-                  onClick={() => changeTheme(localStorage.getItem('theme') === 'light' ? 'dark' : 'light')}
+                  className={`btn btn-${theme}`}
+                  onClick={() => changeTheme(localStorage.getItem('theme') === 'dark' ? 'light' : 'dark')}
                 >
-                  {theme === 'dark' ? '🌙' : '☀'}
+                  {theme === 'dark' ? '☀' : '🌙'}
                 </button>
               </li>
             </ul>
