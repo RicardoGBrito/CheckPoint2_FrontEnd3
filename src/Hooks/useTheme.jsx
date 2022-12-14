@@ -13,7 +13,7 @@ export function ThemeProvider(props) {
 
 
     function changeTheme(themeReceived) {
-        console.log(themeReceived)
+
         if (themeReceived !== theme) {
 
             setTheme(themeReceived)

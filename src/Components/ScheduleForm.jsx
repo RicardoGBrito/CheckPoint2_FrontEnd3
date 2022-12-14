@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import styles from "./ScheduleForm.module.css";
+import { useTheme } from "./../Hooks/useTheme"
 
 const ScheduleForm = () => {
   useEffect(() => {
@@ -15,14 +16,13 @@ const ScheduleForm = () => {
     //Lembre-se de usar um alerta para dizer se foi bem sucedido ou ocorreu um erro
   };
 
+  const { theme } = useTheme()
+
   return (
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-      <div
-        className={`text-center container}`
-        }
-      >
+      <div className={theme === 'dark' ? `text-center container ${styles.cardDark}` : `text-center container`}>
         <form onSubmit={handleSubmit}>
           <div className={`row ${styles.rowSpacing}`}>
             <div className="col-sm-12 col-lg-6">

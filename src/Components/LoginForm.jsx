@@ -1,6 +1,7 @@
 import styles from "./Form.module.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "./../Hooks/useTheme"
 
 const LoginForm = () => {
 
@@ -9,6 +10,7 @@ const LoginForm = () => {
   const [checkInputs, setCheckInputs] = useState(false)
   const [token, setToken] = useState('')
   const navigate = useNavigate()
+  const { theme } = useTheme();
 
   // function passValidation(password){
   //   setPassword(password)
@@ -75,7 +77,7 @@ const LoginForm = () => {
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
       <div
-        className={`text-center card container ${styles.card}`}
+        className={theme === 'dark' ? `text-center card container ${styles.card} ${styles.cardDark}` : `text-center card container ${styles.card}`}
       >
         <div className={`card-body ${styles.CardBody}`}>
           <form onSubmit={handleSubmit}>

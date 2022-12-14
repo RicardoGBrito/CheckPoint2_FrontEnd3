@@ -1,5 +1,5 @@
 import styles from "./Card.module.css";
-import {useTheme} from "./../Hooks/useTheme"
+import { useTheme } from "./../Hooks/useTheme"
 import { Link } from "react-router-dom";
 
 const Card = (props) => {
@@ -10,7 +10,7 @@ const Card = (props) => {
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-      <div className={`card ${theme}`}>
+      <div className={theme === 'dark' ? `card ${styles.CardDark}` : `card`}>
         <img
           className="card-img-top"
           src="/images/doctor.jpg"
