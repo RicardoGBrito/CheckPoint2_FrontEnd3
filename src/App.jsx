@@ -5,7 +5,7 @@ import {useTheme} from "./Hooks/useTheme"
 
 function App() {
   
-  const {theme, changeTheme} = useTheme()
+  const { theme } = useTheme()
 
   return (
     <>

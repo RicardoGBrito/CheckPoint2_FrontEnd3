@@ -15,7 +15,8 @@ import { ThemeProvider } from "./Hooks/useTheme"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 //Lembre-se de configurar suas rotas e seu contexto aqui
-localStorage.setItem('theme', '')
+//localStorage.setItem('theme', '')
+
 const appRouter = createBrowserRouter([
   {
     path: '',
