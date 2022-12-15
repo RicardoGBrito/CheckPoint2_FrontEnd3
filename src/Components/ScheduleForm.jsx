@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ScheduleForm.module.css";
 import { useTheme } from "./../Hooks/useTheme"
 import { useDentistInfo } from "./../Hooks/useDentistInfo";
 import { usePatientInfo } from "./../Hooks/usePatientInfo";
 import { useParams } from "react-router-dom";
+import { useLocalStorageToken } from "../Hooks/useLocalStorageToken"
 
 const ScheduleForm = () => {
 
@@ -11,6 +12,10 @@ const ScheduleForm = () => {
   const { patientInfo } = usePatientInfo()
   const { theme } = useTheme()
   const { id } = useParams()
+  const { localStorageToken } = useLocalStorageToken()
+  const [selectedDentist, setSelectedDentist] = useState(id);
+  const [selectedPatient, setSelectedPatient] = useState();
+  const [selectedAppointmentTime, setselectedAppointmentTime] = useState();
 
   useEffect(() => {
     //Nesse useEffect, você vai fazer um fetch na api buscando TODOS os dentistas
@@ -26,6 +31,61 @@ const ScheduleForm = () => {
     //para a rota da api que marca a consulta
     //lembre-se que essa rota precisa de um Bearer Token para funcionar.
     //Lembre-se de usar um alerta para dizer se foi bem sucedido ou ocorreu um erro
+    
+    event.preventDefault();
+    
+    if (!selectedPatient) setSelectedPatient(patientInfo[0].matricula)
+
+    //if (localStorageToken) {
+      const requestHeaders = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authentication': localStorageToken
+      }
+      
+      const requestBody = {
+        paciente: patientInfo.find(paciente => paciente.matricula === selectedPatient),
+        dentista: dentistInfo.find(dentista => dentista.matricula === selectedDentist),
+        dataHoraAgendamento: selectedAppointmentTime
+      }
+      
+      const requestConfig = {
+        method: 'POST',
+        headers: requestHeaders, 
+        body: JSON.stringify(requestBody) 
+      }
+
+      console.log(requestBody)
+      
+    //   try {
+
+    //     fetch(`http://dhodonto.ctdprojetos.com.br/consulta`, requestConfig)
+    //       .then(response => {
+    //         if (response.status === 200) {
+    //           response.then(dados => {
+                  
+    //             })
+    //         } else {
+    //           alert('Login ou senha incorreto')
+    //         }
+    //       })
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    //}
+  
+  };
+
+  function handleDentistChange(event) {
+    setSelectedDentist(event.target.value)
+  }
+
+  function handlePatientChange(event) {
+    setSelectedPatient(event.target.value)
+  };
+
+  function handleAppointmentTimeChange(event) {
+    setselectedAppointmentTime(event.target.value)
   };
 
   return (
@@ -39,7 +99,7 @@ const ScheduleForm = () => {
               <label htmlFor="dentist" className="form-label">
                 Dentist
               </label>
-              <select defaultValue={id} className="form-select" name="dentist" id="dentist">
+              <select defaultValue={id} className="form-select" name="dentist" id="dentist" onChange={handleDentistChange}>
                 {/*Aqui deve ser feito um map para listar todos os dentistas*/}
                 {
                   dentistInfo &&
@@ -58,7 +118,7 @@ const ScheduleForm = () => {
               <label htmlFor="patient" className="form-label">
                 Patient
               </label>
-              <select className="form-select" name="patient" id="patient">
+              <select className="form-select" name="patient" id="patient" onChange={handlePatientChange}>
                 {/*Aqui deve ser feito um map para listar todos os pacientes*/}
                 {patientInfo &&
                   patientInfo.map(paciente => {
@@ -82,6 +142,7 @@ const ScheduleForm = () => {
                 id="appointmentDate"
                 name="appointmentDate"
                 type="datetime-local"
+                onChange={handleAppointmentTimeChange}
               />
             </div>
           </div>
@@ -89,8 +150,8 @@ const ScheduleForm = () => {
             {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
             <button
-              className={`btn btn-light ${styles.button
-                }`}
+              className={`btn btn-${theme} ${styles.button}`}
+              onClick={handleSubmit}
               type="submit"
             >
               Schedule
