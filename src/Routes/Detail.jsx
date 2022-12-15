@@ -1,38 +1,18 @@
 import DetailCard from "../Components/DetailCard";
-import { useEffect,useState } from "react";
+import { useParams } from "react-router-dom";
+import { useDentistInfo } from "./../Hooks/useDentistInfo";
 
 const Detail = () => {
-
-  //solução provisória para o problema proposto no DetailCard.jsx
-  const [detail, setDetail] = useState([])
-
-  useEffect(() => {
-    fetch('https://dhodonto.ctdprojetos.com.br/dentista').then(
-      response => {
-        response.json().then(
-          data => {
-            setDetail(data);
-          }
-        )
-      }
-    )
-  }, [])
   
-  
+  const { dentistInfo } = useDentistInfo()
+  const { id } = useParams()
+  const currentDentistInfo = dentistInfo.find(dentista => dentista.matricula === id)
+
   return (
     <>
-    {
-      detail.map(
-        detail => {
-          return (
-            <DetailCard 
-              containerData={detail}
-            />
-          )
-        }
-      )
-    }
-      
+      <DetailCard 
+        dentistInfoDetail={currentDentistInfo}
+      />      
     </>
   )
 }

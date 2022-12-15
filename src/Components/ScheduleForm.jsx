@@ -1,10 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import styles from "./ScheduleForm.module.css";
+import { useTheme } from "./../Hooks/useTheme"
 
 const ScheduleForm = () => {
+
+  const [paciente, setPaciente] = useState({})
+  const [dentista, setDentista] = useState({})
+
   useEffect(() => {
     //Nesse useEffect, você vai fazer um fetch na api buscando TODOS os dentistas
     //e pacientes e carregar os dados em 2 estados diferentes
+
+    /* fetch('http://dhodonto.ctdprojetos.com.br/dentista').then((response) => response.json()).then(data => console.log(data.body)) */
+    /* fetch('http://dhodonto.ctdprojetos.com.br/paciente').then((response) => response.json()).then(data => console.log(data)) */
   }, []);
 
   const handleSubmit = (event) => {
@@ -15,14 +23,13 @@ const ScheduleForm = () => {
     //Lembre-se de usar um alerta para dizer se foi bem sucedido ou ocorreu um erro
   };
 
+  const { theme } = useTheme()
+
   return (
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-      <div
-        className={`text-center container}`
-        }
-      >
+      <div className={theme === 'dark' ? `text-center container ${styles.cardDark}` : `text-center container`}>
         <form onSubmit={handleSubmit}>
           <div className={`row ${styles.rowSpacing}`}>
             <div className="col-sm-12 col-lg-6">
@@ -30,6 +37,7 @@ const ScheduleForm = () => {
                 Dentist
               </label>
               <select className="form-select" name="dentist" id="dentist">
+                {/*Aqui deve ser feito um map para listar todos os dentistas*/}
                 {/*Aqui deve ser feito um map para listar todos os dentistas*/}
                 <option key={'Matricula do dentista'} value={'Matricula do dentista'}>
                   {`Nome Sobrenome`}

@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Card from "../Components/Card";
-import { useState } from "react";
-
+import { useDentistInfo } from "./../Hooks/useDentistInfo"
 
 const Home = () => {
 
-  const [cardDados, setCardDados] = useState([])
+  //const [cardDados, setCardDados] = useState([])
+  const { dentistInfo, changeDentistInfo } = useDentistInfo()
 
   useEffect(() => {
     //Nesse useEffect, deverá ser obtido todos os dentistas da API
@@ -16,7 +16,7 @@ const Home = () => {
       response => {
         response.json().then(
           data => {
-            setCardDados(data)
+            changeDentistInfo(data)
           }
         )
       }
@@ -30,9 +30,10 @@ const Home = () => {
       <div className="card-grid container">
         {/* <Card /> */}
         {
-          cardDados.map(container => {
+          dentistInfo.map(container => {
             return (
               <Card
+                key={container.matricula}
                 containerData={container}
               />
             )

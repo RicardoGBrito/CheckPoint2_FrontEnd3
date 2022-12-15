@@ -1,23 +1,31 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ScheduleFormModal from "./ScheduleFormModal";
 import styles from "./DetailCard.module.css";
+import {useTheme} from "./../Hooks/useTheme"
 
 const DetailCard = (props) => {
+
+  const { theme } = useTheme();
 
   useEffect(() => {
     //Nesse useEffect, você vai fazer um fetch na api passando o 
     //id do dentista que está vindo do react-router e carregar os dados em algum estado
+    
+  
   }, []);
+
+  console.log(props)
+
   return (
     //As instruções que estão com {''} precisam ser 
     //substituídas com as informações que vem da api
     <>
-      <h1>Detail about Dentist {'Nome do Dentista'} </h1>
+      <h1>Detail about Dentist {props.dentistInfoDetail.nome} </h1>
       <section className="card col-sm-12 col-lg-6 container">
         {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
         <div
-          className={`card-body row`}
+          className={`card-body row card-${theme}`}
         >
           <div className="col-sm-12 col-lg-6">
             <img
@@ -28,12 +36,12 @@ const DetailCard = (props) => {
           </div>
           <div className="col-sm-12 col-lg-6">
             <ul className="list-group">
-              <li className="list-group-item">Nome: {props.containerData.nome}</li>
+              <li className="list-group-item">Nome: {props.dentistInfoDetail.nome}</li>
               <li className="list-group-item">
-                Sobrenome: {props.containerData.sobrenome}
+                Sobrenome: {props.dentistInfoDetail.sobrenome}
               </li>
               <li className="list-group-item">
-                Usuário: {props.containerData.nome}
+                Usuário: {props.dentistInfoDetail.usuario.username}
               </li>
             </ul>
             <div className="text-center">
@@ -42,8 +50,7 @@ const DetailCard = (props) => {
               <button
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                className={`btn btn-light ${styles.button
-                  }`}
+                className={`btn btn-light ${styles.button}`}
               >
                 Marcar consulta
               </button>
