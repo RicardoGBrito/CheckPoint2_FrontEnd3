@@ -15,8 +15,9 @@ const ScheduleForm = () => {
   const { localStorageToken, changeLocalStorageToken } = useLocalStorageToken()
   const [selectedDentist, setSelectedDentist] = useState(id);
   const [selectedPatient, setSelectedPatient] = useState();
-  const [selectedAppointmentTime, setselectedAppointmentTime] = useState();
-  const [loginFormError, setLoginFormError] = useState(!localStorageToken)
+  const [selectedAppointmentTime, setSelectedAppointmentTime] = useState();
+  const [loginFormError, setLoginFormError] = useState(!localStorageToken);
+  const [dateTimeFormError, setDateTimeFormError] = useState(false)
 
   useEffect(() => {
     //Nesse useEffect, você vai fazer um fetch na api buscando TODOS os dentistas
@@ -32,6 +33,11 @@ const ScheduleForm = () => {
     //Lembre-se de usar um alerta para dizer se foi bem sucedido ou ocorreu um erro
     
     event.preventDefault();
+
+    if (!selectedAppointmentTime) {
+      setDateTimeFormError(true)
+      return
+    }
     
     if (!selectedPatient) setSelectedPatient(patientInfo[0].matricula)
 
@@ -63,7 +69,10 @@ const ScheduleForm = () => {
               alert('Login ou senha incorreto')
               changeLocalStorageToken("")
             } else {
-              alert("Ocorreu um erro, tente novamente")
+              response.text()
+              .then(dados => {
+                alert(dados)
+              })
             }
           })
       } catch (error) {
@@ -81,7 +90,8 @@ const ScheduleForm = () => {
   };
 
   function handleAppointmentTimeChange(event) {
-    setselectedAppointmentTime(event.target.value)
+    setDateTimeFormError(false)
+    setSelectedAppointmentTime(event.target.value)
   };
 
   return (
@@ -149,10 +159,12 @@ const ScheduleForm = () => {
               className={`btn btn-${theme} ${styles.button}`}
               onClick={handleSubmit}
               type="submit"
+              disabled={loginFormError}
             >
               Schedule
             </button>
             {loginFormError && <small className={`${styles.smallErrorForm}`}>Você precisa estar logado para agendar uma consulta</small>}
+            {dateTimeFormError && <small className={`${styles.smallErrorForm}`}>Você precisa escolher um horário para agendar uma consulta</small>}
           </div>
         </form>
       </div>
