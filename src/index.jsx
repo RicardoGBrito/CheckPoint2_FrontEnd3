@@ -15,6 +15,7 @@ import "./index.css";
 import { ThemeProvider } from "./Hooks/useTheme"
 import { DentistInfoProvider } from "./Hooks/useDentistInfo"
 import { LocalStorageTokenProvider } from "./Hooks/useLocalStorageToken";
+import { PatientInfoProvider } from "./Hooks/usePatientInfo";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 //Lembre-se de configurar suas rotas e seu contexto aqui
@@ -51,9 +52,10 @@ root.render(
   <React.StrictMode>
     <ThemeProvider>
       <LocalStorageTokenProvider>
-
         <DentistInfoProvider>
-          <RouterProvider router={appRouter} />
+          <PatientInfoProvider>
+            <RouterProvider router={appRouter} />
+          </PatientInfoProvider>
         </DentistInfoProvider>
       </LocalStorageTokenProvider>
     </ThemeProvider>

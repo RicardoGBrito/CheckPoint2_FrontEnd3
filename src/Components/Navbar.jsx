@@ -9,8 +9,6 @@ const Navbar = () => {
   const { theme, changeTheme } = useTheme()
   const { localStorageToken, changeLocalStorageToken } = useLocalStorageToken()
 
-  console.log(localStorageToken)
-
   return (
     <header className={`sticky-top`}>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
@@ -51,7 +49,7 @@ const Navbar = () => {
                 ao formulário de login
                 O botão de logout deverá ser testado darkmode
                 se sim, btn-dark, se não, btn-light */}
-                <Link className="nav-link" to="login" onClick={(event)=>{if(event.target.innerHTML === 'Logout'){changeLocalStorageToken('')}}} >{(localStorageToken !== '')?'Logout': 'Login'}</Link>
+                <Link className="nav-link" to="login" onClick={(event)=>{if(event.target.innerHTML === 'Logout'){changeLocalStorageToken('')}}} >{localStorageToken ? 'Logout': 'Login'}</Link>
               </li>
               <li className={`nav-item`}>
                 {/* Ao ser clicado, esse botão mudará a aplicação para dark mode ou light mode.

@@ -14,8 +14,6 @@ const DetailCard = (props) => {
   
   }, []);
 
-  console.log(props)
-
   return (
     //As instruções que estão com {''} precisam ser 
     //substituídas com as informações que vem da api

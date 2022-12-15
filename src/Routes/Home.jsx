@@ -4,32 +4,31 @@ import { useDentistInfo } from "./../Hooks/useDentistInfo"
 
 const Home = () => {
 
-  //const [cardDados, setCardDados] = useState([])
-  const { dentistInfo, changeDentistInfo } = useDentistInfo()
+  const { dentistInfo } = useDentistInfo()
 
-  useEffect(() => {
-    //Nesse useEffect, deverá ser obtido todos os dentistas da API
-    //Armazena-los em um estado para posteriormente fazer um map
-    //Usando o componente <Card />
+  // useEffect(() => {
+  //   //Nesse useEffect, deverá ser obtido todos os dentistas da API
+  //   //Armazena-los em um estado para posteriormente fazer um map
+  //   //Usando o componente <Card />
 
-    fetch('https://dhodonto.ctdprojetos.com.br/dentista').then(
-      response => {
-        response.json().then(
-          data => {
-            changeDentistInfo(data)
-          }
-        )
-      }
-    )
+  //   fetch('https://dhodonto.ctdprojetos.com.br/dentista').then(
+  //     response => {
+  //       response.json().then(
+  //         data => {
+  //           changeDentistInfo(data)
+  //         }
+  //       )
+  //     }
+  //   )
 
-  }, []);
+  // }, []);
 
   return (
     <>
       <h1>Home</h1>
       <div className="card-grid container">
         {/* <Card /> */}
-        {
+        {dentistInfo &&
           dentistInfo.map(container => {
             return (
               <Card

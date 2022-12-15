@@ -6,13 +6,12 @@ const Detail = () => {
   
   const { dentistInfo } = useDentistInfo()
   const { id } = useParams()
-  const currentDentistInfo = dentistInfo.find(dentista => dentista.matricula === id)
 
   return (
     <>
-      <DetailCard 
-        dentistInfoDetail={currentDentistInfo}
-      />      
+      {dentistInfo && <DetailCard 
+        dentistInfoDetail={dentistInfo.find(dentista => dentista.matricula === id)}
+      />}      
     </>
   )
 }
