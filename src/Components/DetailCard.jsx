@@ -23,7 +23,7 @@ const DetailCard = (props) => {
         {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
         <div
-          className={`card-body row card-${theme}`}
+          className={theme === 'dark' ? `card-body row card-${theme} ${styles.cardDark}` : `card-body row`}
         >
           <div className="col-sm-12 col-lg-6">
             <img
@@ -48,7 +48,7 @@ const DetailCard = (props) => {
               <button
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                className={`btn btn-light ${styles.button}`}
+                className={`btn btn-${theme} ${styles.button}`}
               >
                 Marcar consulta
               </button>

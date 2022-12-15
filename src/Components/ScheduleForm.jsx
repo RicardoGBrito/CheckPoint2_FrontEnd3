@@ -16,14 +16,13 @@ const ScheduleForm = () => {
   const [selectedDentist, setSelectedDentist] = useState(id);
   const [selectedPatient, setSelectedPatient] = useState();
   const [selectedAppointmentTime, setselectedAppointmentTime] = useState();
+  const [loginFormError, setLoginFormError] = useState(!localStorageToken)
 
   useEffect(() => {
     //Nesse useEffect, você vai fazer um fetch na api buscando TODOS os dentistas
     //e pacientes e carregar os dados em 2 estados diferentes
-
-    /* fetch('http://dhodonto.ctdprojetos.com.br/dentista').then((response) => response.json()).then(data => console.log(data.body)) */
-    /* fetch('http://dhodonto.ctdprojetos.com.br/paciente').then((response) => response.json()).then(data => console.log(data)) */
-  }, []);
+    setLoginFormError(!localStorageToken)
+  }, [localStorageToken]);
 
   const handleSubmit = (event) => {
     //Nesse handlesubmit você deverá usar o preventDefault,
@@ -153,6 +152,7 @@ const ScheduleForm = () => {
             >
               Schedule
             </button>
+            {loginFormError && <small className={`${styles.smallErrorForm}`}>Você precisa estar logado para agendar uma consulta</small>}
           </div>
         </form>
       </div>

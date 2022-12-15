@@ -1,4 +1,4 @@
-import {link, redirect, useNavigate} from "react-router-dom"
+import { useNavigate} from "react-router-dom"
 import styles from "./Form.module.css";
 import { useState } from "react";
 /* import { useNavigate } from "react-router-dom"; */
@@ -11,7 +11,6 @@ const LoginForm = () => {
   const [password, setPassword] = useState('')
   const [login, setLogin] = useState('')
   const [checkInputs, setCheckInputs] = useState(false)
-  /* const [token, setToken] = useState('') */
   const navigate = useNavigate()
   const { theme } = useTheme();
 

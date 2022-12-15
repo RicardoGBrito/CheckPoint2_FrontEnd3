@@ -9,3 +9,7 @@
 .rowSpacing{
   padding-bottom: 1rem;
 }
+
+.smallErrorForm {
+  color: red;
+}
