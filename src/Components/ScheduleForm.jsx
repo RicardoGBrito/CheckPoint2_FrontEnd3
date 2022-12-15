@@ -12,7 +12,7 @@ const ScheduleForm = () => {
   const { patientInfo } = usePatientInfo()
   const { theme } = useTheme()
   const { id } = useParams()
-  const { localStorageToken } = useLocalStorageToken()
+  const { localStorageToken, changeLocalStorageToken } = useLocalStorageToken()
   const [selectedDentist, setSelectedDentist] = useState(id);
   const [selectedPatient, setSelectedPatient] = useState();
   const [selectedAppointmentTime, setselectedAppointmentTime] = useState();
@@ -38,9 +38,8 @@ const ScheduleForm = () => {
 
     //if (localStorageToken) {
       const requestHeaders = {
-        'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authentication': localStorageToken
+        'Authorization': `Bearer ${localStorageToken}`
       }
       
       const requestBody = {
@@ -54,25 +53,23 @@ const ScheduleForm = () => {
         headers: requestHeaders, 
         body: JSON.stringify(requestBody) 
       }
-
-      console.log(requestBody)
       
-    //   try {
+      try {
 
-    //     fetch(`http://dhodonto.ctdprojetos.com.br/consulta`, requestConfig)
-    //       .then(response => {
-    //         if (response.status === 200) {
-    //           response.then(dados => {
-                  
-    //             })
-    //         } else {
-    //           alert('Login ou senha incorreto')
-    //         }
-    //       })
-    //   } catch (error) {
-    //     console.log(error)
-    //   }
-    //}
+        fetch(`http://dhodonto.ctdprojetos.com.br/consulta`, requestConfig)
+          .then(response => {
+            if (response.status === 200) {
+              alert('Consulta agendada com sucesso')
+            } else if (response.status === 403){
+              alert('Login ou senha incorreto')
+              changeLocalStorageToken("")
+            } else {
+              alert("Ocorreu um erro, tente novamente")
+            }
+          })
+      } catch (error) {
+        console.log(error)
+      }
   
   };
 

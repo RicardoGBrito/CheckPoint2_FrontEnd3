@@ -7,7 +7,7 @@ const LocalStorageTokenContext = createContext()
 // Criação do Provedor para o Contexto
 export function LocalStorageTokenProvider(props) {
 
-    const [localStorageToken, setLocalStorageToken] = useState()
+    const [localStorageToken, setLocalStorageToken] = useState(localStorage.getItem('token') || "")
 
     // Função responsável por Trocar o Tema
     function changeLocalStorageToken(localStorageTokenReceived) {
