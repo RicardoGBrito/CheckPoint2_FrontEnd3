@@ -7,6 +7,7 @@ import Login from "../Routes/Login"
 import App from "../App"
 import { LocalStorageTokenProvider } from "../Hooks/useLocalStorageToken"
 import { DentistInfoProvider } from "../Hooks/useDentistInfo"
+import { PatientInfoProvider } from "../Hooks/usePatientInfo"
 
 
 const renderWithContext = (ui, providerValue)=>{
@@ -15,7 +16,10 @@ const renderWithContext = (ui, providerValue)=>{
             <ThemeProvider value={providerValue || {theme: "light", data: []}} > 
                 <LocalStorageTokenProvider>
                     <DentistInfoProvider>
-                        {ui}
+                        <PatientInfoProvider>
+
+                            {ui}
+                        </PatientInfoProvider>
 
                     </DentistInfoProvider>
                 </LocalStorageTokenProvider>  
